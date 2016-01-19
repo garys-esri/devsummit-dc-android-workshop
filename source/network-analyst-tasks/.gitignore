@@ -1,0 +1,14 @@
+# Android Studio's default .gitignore
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+# Some say to ignore the entire .idea directory. I'm not sure about that, but it's
+# cleaner to ignore now and un-ignore add those files later than to add the files
+# now and remove them later, so we'll ignore them for now.
+/.idea
