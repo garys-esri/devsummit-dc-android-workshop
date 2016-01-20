@@ -2,8 +2,9 @@ package com.esri.devsummit.dc.year2016.networkanalysttasks;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,27 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout_naTools);
-        tabLayout.addTab(routeTab = tabLayout.newTab().setText("Route"));
-        tabLayout.addTab(serviceAreaTab = tabLayout.newTab().setText("Service Area"));
-        tabLayout.addTab(closestFacilityTab = tabLayout.newTab().setText("Closest Facility"));
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar_supportActionBar));
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabSelected " + tab.getText());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabUnselected " + tab.getText());
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                Log.d(TAG, "onTabReselected " + tab.getText());
-            }
-        });
+//        ActionBar actionBar = getSupportActionBar();
     }
 
     @Override
@@ -52,16 +35,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        switch (id) {
+            case R.id.action_settings:
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_route:
+                return true;
+
+            case R.id.action_serviceArea:
+                return true;
+
+            case R.id.action_closestFacility:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

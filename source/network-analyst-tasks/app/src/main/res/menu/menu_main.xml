@@ -3,6 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.esri.devsummit.dc.year2016.networkanalysttasks.MainActivity">
     <item
+        android:id="@+id/action_route"
+        android:title="Route"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_serviceArea"
+        android:title="Service Area"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_closestFacility"
+        android:title="Closest Facility"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
