@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.esri.devsummit.dc.year2016.networkanalysttasks.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="com.esri.devsummit.dc.year2016.networkanalysttasks.MainActivity">
 
     <com.esri.android.map.MapView
         android:id="@+id/map"
@@ -14,5 +13,11 @@
         mapoptions.center="34.056215, -117.195668"
         mapoptions.ZoomLevel="16">
     </com.esri.android.map.MapView>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout_naTools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.design.widget.TabLayout>
 
 </RelativeLayout>

@@ -1,20 +1,46 @@
 package com.esri.devsummit.dc.year2016.networkanalysttasks;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    private TabLayout.Tab routeTab = null;
+    private TabLayout.Tab serviceAreaTab = null;
+    private TabLayout.Tab closestFacilityTab = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout_naTools);
+        tabLayout.addTab(routeTab = tabLayout.newTab().setText("Route"));
+        tabLayout.addTab(serviceAreaTab = tabLayout.newTab().setText("Service Area"));
+        tabLayout.addTab(closestFacilityTab = tabLayout.newTab().setText("Closest Facility"));
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                Log.d(TAG, "onTabSelected " + tab.getText());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                Log.d(TAG, "onTabUnselected " + tab.getText());
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                Log.d(TAG, "onTabReselected " + tab.getText());
+            }
+        });
     }
 
     @Override
