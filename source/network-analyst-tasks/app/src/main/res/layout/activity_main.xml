@@ -18,7 +18,7 @@
         app:popupTheme="@style/AppTheme.NoActionBar"/>
 
     <com.esri.android.map.MapView
-        android:id="@+id/map"
+        android:id="@+id/mapView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/toolbar_supportActionBar"
@@ -26,5 +26,16 @@
         mapoptions.center="34.056215, -117.195668"
         mapoptions.ZoomLevel="16">
     </com.esri.android.map.MapView>
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/viewPager_naTools"
+        android:layout_width="@dimen/naTools_width"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/naTools_margin"
+        android:layout_below="@+id/toolbar_supportActionBar"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"/>
 
 </RelativeLayout>
