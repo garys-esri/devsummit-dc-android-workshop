@@ -4,14 +4,17 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public class NetworkAnalystTasksPagerAdapter extends FragmentPagerAdapter {
 
@@ -33,26 +36,7 @@ public class NetworkAnalystTasksPagerAdapter extends FragmentPagerAdapter {
                     if (rootView instanceof ViewGroup) {
                         ViewGroup rootViewGroup = (ViewGroup) rootView;
                         for (int i = 1; i <= 2; i++) {
-                            final ViewGroup locationChooser = (ViewGroup) inflater.inflate(R.layout.location_chooser, rootViewGroup, false);
-                            TextView textView_locationText = (TextView) locationChooser.findViewById(R.id.textView_locationText);
-                            textView_locationText.setHint("Stop " + i);
-                            CompoundButton toggleButton_choosePoint = (CompoundButton) locationChooser.findViewById(R.id.toggleButton_choosePoint);
-                            locationChooserToggleButtons.add(toggleButton_choosePoint);
-                            toggleButton_choosePoint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                @Override
-                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                    if (isChecked) {
-                                        Iterator<CompoundButton> buttons = locationChooserToggleButtons.iterator();
-                                        while (buttons.hasNext()) {
-                                            CompoundButton button = buttons.next();
-                                            if (!button.equals(buttonView)) {
-                                                button.setChecked(false);
-                                            }
-                                        }
-                                    }
-                                }
-                            });
-                            rootViewGroup.addView(locationChooser);
+                            addLocationChooser(inflater, rootViewGroup, locationChooserToggleButtons, "Stop " + i);
                         }
                     }
                     break;
@@ -60,6 +44,45 @@ public class NetworkAnalystTasksPagerAdapter extends FragmentPagerAdapter {
 
             return rootView;
         }
+    }
+
+    private static void addLocationChooser(
+            LayoutInflater inflater,
+            ViewGroup rootViewGroup,
+            final Set<CompoundButton> buttonSet,
+            String hint) {
+        final ViewGroup locationChooser = (ViewGroup) inflater.inflate(R.layout.location_chooser, rootViewGroup, false);
+        TextView textView_locationText = (TextView) locationChooser.findViewById(R.id.textView_locationText);
+        textView_locationText.setHint(hint);
+        CompoundButton toggleButton_choosePoint = (CompoundButton) locationChooser.findViewById(R.id.toggleButton_choosePoint);
+        buttonSet.add(toggleButton_choosePoint);
+        toggleButton_choosePoint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    //Resize ViewPager
+                    ViewParent parent = buttonView.getParent();
+                    while (null != parent) {
+                        if (parent instanceof ViewPager) {
+                            ViewPager viewPager = (ViewPager) parent;
+                            ViewGroup.LayoutParams layoutParams = viewPager.getLayoutParams();
+                            layoutParams.height = ((View) viewPager.getParent()).getHeight() / 2;
+                            viewPager.setLayoutParams(layoutParams);
+                        }
+
+                        parent = parent.getParent();
+                    }
+
+                    for (CompoundButton button : buttonSet) {
+                        if (!button.equals(buttonView)) {
+                            button.setChecked(false);
+                        }
+                    }
+                }
+            }
+        });
+        rootViewGroup.addView(locationChooser);
     }
 
     public NetworkAnalystTasksPagerAdapter(FragmentManager fm) {
