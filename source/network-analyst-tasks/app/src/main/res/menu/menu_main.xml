@@ -1,18 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.esri.devsummit.dc.year2016.networkanalysttasks.MainActivity">
+    tools:context="com.esri.devsummit.dc.year2016.networkanalysttasks.view.MainActivity">
     <item
         android:id="@+id/action_route"
-        android:title="Route"
+        android:title="@string/route"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_serviceArea"
-        android:title="Service Area"
+        android:title="@string/service_area"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_closestFacility"
-        android:title="Closest Facility"
+        android:title="@string/closest_facility"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

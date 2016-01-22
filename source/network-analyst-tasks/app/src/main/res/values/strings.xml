@@ -2,4 +2,7 @@
     <string name="app_name">Network Analyst Tasks</string>
     <string name="app_name_short">NA Tasks</string>
     <string name="action_settings">Settings</string>
+    <string name="route">Route</string>
+    <string name="service_area">Service Area</string>
+    <string name="closest_facility">Closest Facility</string>
 </resources>
