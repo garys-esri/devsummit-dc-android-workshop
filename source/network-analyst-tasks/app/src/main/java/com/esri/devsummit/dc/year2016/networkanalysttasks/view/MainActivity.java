@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
-
             FloatingActionButton fab_closestFacility = (FloatingActionButton) findViewById(R.id.fab_closestFacility);
             FloatingActionButton fab_serviceArea = (FloatingActionButton) findViewById(R.id.fab_serviceArea);
             FloatingActionButton fab_route = (FloatingActionButton) findViewById(R.id.fab_route);
@@ -99,6 +96,21 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new FabOnClickListener());
+    }
+
+    public void fab_route_onClick(View view) {
+        Snackbar.make(view, "TODO open Route tool", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    public void fab_serviceArea_onClick(View view) {
+        Snackbar.make(view, "TODO open Service Area tool", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    public void fab_closestFacility_onClick(View view) {
+        Snackbar.make(view, "TODO open Closest Facility tool", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 
 }
