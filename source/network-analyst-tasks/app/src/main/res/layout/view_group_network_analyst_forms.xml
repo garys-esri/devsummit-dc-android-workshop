@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewAnimator
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewAnimator_networkAnalystForms"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/fragment_routeForm"
+        android:name="com.esri.devsummit.dc.year2016.networkanalysttasks.view.RouteFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_route_form"/>
+
+    <fragment
+        android:id="@+id/fragment_serviceAreaForm"
+        android:name="com.esri.devsummit.dc.year2016.networkanalysttasks.view.ServiceAreaFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_service_area_form"/>
+
+    <fragment
+        android:id="@+id/fragment_closestFacilityForm"
+        android:name="com.esri.devsummit.dc.year2016.networkanalysttasks.view.ClosestFacilityFormFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_closest_facility_form"/>
+
+</ViewAnimator>

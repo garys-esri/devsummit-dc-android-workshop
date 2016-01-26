@@ -5,4 +5,14 @@
     <string name="route">Route</string>
     <string name="service_area">Service Area</string>
     <string name="closest_facility">Closest Facility</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_route_fragment">Hello route fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_service_area_fragment">Hello service area fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_closest_facility_fragment">Hello closest facility fragment</string>
+    <string name="network_analyst_form">Network Analyst Form</string>
 </resources>

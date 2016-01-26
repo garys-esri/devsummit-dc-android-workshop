@@ -10,17 +10,18 @@
         android:name="com.esri.devsummit.dc.year2016.networkanalysttasks.view.MainMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toLeftOf="@+id/textView_sideMenu"
-        android:layout_toStartOf="@+id/textView_sideMenu"
+        android:layout_toLeftOf="@+id/view_networkAnalysisForms"
+        android:layout_toStartOf="@+id/view_networkAnalysisForms"
         tools:layout="@layout/fragment_main_map" />
 
-    <TextView
-        android:id="@+id/textView_sideMenu"
-        android:text="This is the side menu"
-        android:background="@color/colorAccent"
+    <LinearLayout
+        android:id="@+id/view_networkAnalysisForms"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:visibility="gone"
         android:layout_width="320dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <include layout="@layout/view_group_network_analyst_forms" />
+    </LinearLayout>
 
 </RelativeLayout>

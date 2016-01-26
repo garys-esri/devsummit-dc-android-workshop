@@ -1,14 +1,15 @@
 package com.esri.devsummit.dc.year2016.networkanalysttasks.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ViewAnimator;
 
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
 
@@ -99,18 +100,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fab_route_onClick(View view) {
-        Snackbar.make(view, "TODO open Route tool", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        showNetworkAnalystForm(view, 0);
     }
 
     public void fab_serviceArea_onClick(View view) {
-        Snackbar.make(view, "TODO open Service Area tool", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        showNetworkAnalystForm(view, 1);
     }
 
     public void fab_closestFacility_onClick(View view) {
-        Snackbar.make(view, "TODO open Closest Facility tool", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        showNetworkAnalystForm(view, 2);
+    }
+
+    private void showNetworkAnalystForm(View view, int index) {
+        View view_networkAnalystForms = findViewById(R.id.view_networkAnalysisForms);
+        if (null != view_networkAnalystForms) {
+            ViewAnimator viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator_networkAnalystForms);
+            viewAnimator.setDisplayedChild(index);
+            view_networkAnalystForms.setVisibility(View.VISIBLE);
+        } else {
+            Intent intent = new Intent(this, NetworkAnalystFormActivity.class);
+            intent.putExtra(NetworkAnalystFormActivity.EXTRA_NETWORK_ANALYST_FORM_INDEX, index);
+            startActivity(intent);
+        }
     }
 
 }
