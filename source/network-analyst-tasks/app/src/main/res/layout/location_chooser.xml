@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
     <ToggleButton
         android:id="@+id/toggleButton_choosePoint"
-        android:text="Tap Point"
+        android:text="@string/tap_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
