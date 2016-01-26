@@ -100,18 +100,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fab_route_onClick(View view) {
-        showNetworkAnalystForm(view, 0);
+        showNetworkAnalystForm(0);
     }
 
     public void fab_serviceArea_onClick(View view) {
-        showNetworkAnalystForm(view, 1);
+        showNetworkAnalystForm(1);
     }
 
     public void fab_closestFacility_onClick(View view) {
-        showNetworkAnalystForm(view, 2);
+        showNetworkAnalystForm(2);
     }
 
-    private void showNetworkAnalystForm(View view, int index) {
+    private void showNetworkAnalystForm(int index) {
         View view_networkAnalystForms = findViewById(R.id.view_networkAnalysisForms);
         if (null != view_networkAnalystForms) {
             ViewAnimator viewAnimator = (ViewAnimator) findViewById(R.id.viewAnimator_networkAnalystForms);
