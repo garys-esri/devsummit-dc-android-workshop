@@ -15,9 +15,6 @@ import com.esri.core.geometry.Point;
 import com.esri.core.geometry.SpatialReference;
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainMapFragment extends Fragment {
 
     private Layer[] layers = new Layer[] {

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
+    android:tag="@string/location_chooser_tag"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ToggleButton
         android:id="@+id/toggleButton_choosePoint"
         android:text="@string/tap_point"
+        android:tag="LocationChooser_ChoosePoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/textView_locationText"
+        android:tag="LocationChooser_LocationText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

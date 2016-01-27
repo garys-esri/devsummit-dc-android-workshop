@@ -1,7 +1,5 @@
 package com.esri.devsummit.dc.year2016.networkanalysttasks.view;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +16,7 @@ import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
  * Use the {@link RouteFormFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RouteFormFragment extends Fragment {
+public class RouteFormFragment extends NetworkAnalystFormFragment {
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -62,12 +60,12 @@ public class RouteFormFragment extends Fragment {
 //    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_route_form, container, false);
     }
 
-//    // TODO: Rename method, update argument and hook method into UI event
+
+    //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);

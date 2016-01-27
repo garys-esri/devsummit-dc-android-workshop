@@ -16,4 +16,5 @@
     <string name="hello_closest_facility_fragment">Hello closest facility fragment</string>
     <string name="network_analyst_form">Network Analyst Form</string>
     <string name="tap_point">Tap Point</string>
+    <string name="location_chooser_tag">Location Chooser Tag</string>
 </resources>

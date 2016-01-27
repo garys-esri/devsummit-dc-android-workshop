@@ -11,6 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ViewAnimator;
 
+import com.esri.android.map.MapView;
+import com.esri.android.map.event.OnSingleTapListener;
+import com.esri.core.geometry.Point;
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -122,6 +125,32 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(NetworkAnalystFormActivity.EXTRA_NETWORK_ANALYST_FORM_INDEX, index);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final MapView mapView = (MapView) findViewById(R.id.map);
+        mapView.unpause();
+
+        if (NetworkAnalystFormFragment.ACTION_TAP_POINT.equals(getIntent().getAction())) {
+            mapView.setOnSingleTapListener(new OnSingleTapListener() {
+                @Override
+                public void onSingleTap(float x, float y) {
+                    Point pt = mapView.toMapPoint(x, y);
+                    Intent intent = new Intent();
+                    intent.putExtra(NetworkAnalystFormFragment.EXTRA_XY, new double[]{pt.getX(), pt.getY()});
+                    setResult(NetworkAnalystFormFragment.RESULT_TAP_POINT_OK, intent);
+                    finish();
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ((MapView) findViewById(R.id.map)).pause();
     }
 
 }

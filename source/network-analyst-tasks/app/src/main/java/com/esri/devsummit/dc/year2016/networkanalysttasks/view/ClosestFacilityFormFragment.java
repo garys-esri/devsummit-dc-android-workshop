@@ -1,7 +1,5 @@
 package com.esri.devsummit.dc.year2016.networkanalysttasks.view;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +16,7 @@ import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
  * Use the {@link ClosestFacilityFormFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClosestFacilityFormFragment extends Fragment {
+public class ClosestFacilityFormFragment extends NetworkAnalystFormFragment {
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -61,10 +59,9 @@ public class ClosestFacilityFormFragment extends Fragment {
 //        }
 //    }
 //
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    protected View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_closest_facility_form, container, false);
     }
 //
