@@ -2,11 +2,17 @@ package com.esri.devsummit.dc.year2016.networkanalysttasks.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.esri.core.geometry.Point;
+import com.esri.core.tasks.na.RouteTask;
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
+import com.esri.devsummit.dc.year2016.networkanalysttasks.controller.RouteAsyncTask;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +23,8 @@ import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
  * create an instance of this fragment.
  */
 public class RouteFormFragment extends NetworkAnalystFormFragment {
+
+    private static final String TAG = RouteFormFragment.class.getSimpleName();
 //    // TODO: Rename parameter arguments, choose names that match
 //    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
@@ -27,6 +35,8 @@ public class RouteFormFragment extends NetworkAnalystFormFragment {
 //    private String mParam2;
 
 //    private OnFragmentInteractionListener mListener;
+
+    private RouteTask routeTask = null;
 
 //    public RouteFormFragment() {
 //        // Required empty public constructor
@@ -50,20 +60,44 @@ public class RouteFormFragment extends NetworkAnalystFormFragment {
 //        return fragment;
 //    }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
 //        }
-//    }
+        try {
+            routeTask = createRouteTask();
+        } catch (Exception e) {
+            Log.e(TAG, null, e);
+            //TODO notify user via UI
+            routeTask = null;
+        }
+    }
+
+    private static RouteTask createRouteTask() throws Exception {
+        return RouteTask.createOnlineRouteTask("http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route", null);
+    }
 
     @Override
     protected View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_route_form, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_route_form, container, false);
 
+        View doRouteButton = view.findViewById(R.id.button_doRoute);
+        doRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Point> stops = getStops();
+                List<Integer> stopWkids = getStopSpatialReferenceWkids();
+
+                RouteAsyncTask task = new RouteAsyncTask(stopWkids.get(0), routeTask);
+                task.execute(stops.toArray(new Point[stops.size()]));
+            }
+        });
+
+        return view;
+    }
 
     //    // TODO: Rename method, update argument and hook method into UI event
 //    public void onButtonPressed(Uri uri) {

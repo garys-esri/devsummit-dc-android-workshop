@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.esri.android.map.MapView;
+import com.esri.core.geometry.Point;
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
 
 import java.util.ArrayList;
@@ -25,8 +26,20 @@ public abstract class NetworkAnalystFormFragment extends Fragment implements Vie
     public static final String ACTION_TAP_POINT = NetworkAnalystFormFragment.class.getName() + ".ACTION_TAP_POINT";
 
     public static final String EXTRA_XY = "EXTRA_XY";
+    public static final String EXTRA_SR_WKID = "EXTRA_SR_WKID";
+
+    private final ArrayList<Point> stops = new ArrayList<>();
+    private final ArrayList<Integer> stopSrWkids = new ArrayList<>();
 
     protected abstract View inflateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    protected List<Point> getStops() {
+        return stops;
+    }
+
+    protected List<Integer> getStopSpatialReferenceWkids() {
+        return stopSrWkids;
+    }
 
     @Nullable
     @Override
@@ -40,6 +53,8 @@ public abstract class NetworkAnalystFormFragment extends Fragment implements Vie
                 if (null != button) {
                     button.setOnClickListener(this);
                 }
+                stops.add(null);
+                stopSrWkids.add(null);
             }
         }
 
@@ -82,9 +97,14 @@ public abstract class NetworkAnalystFormFragment extends Fragment implements Vie
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (RESULT_TAP_POINT_OK == resultCode) {
             double[] xy = data.getExtras().getDoubleArray(EXTRA_XY);
+            int wkid = data.getExtras().getInt(EXTRA_SR_WKID);
             View chooser = getLocationChoosers((ViewGroup) getView()).get(requestCode);
             TextView textView = (TextView) chooser.findViewById(R.id.textView_locationText);
             textView.setText(xy[0] + ", " + xy[1]);
+            stops.remove(requestCode);
+            stops.add(requestCode, new Point(xy[0], xy[1]));
+            stopSrWkids.remove(requestCode);
+            stopSrWkids.add(requestCode, wkid);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
