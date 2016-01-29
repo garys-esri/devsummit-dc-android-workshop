@@ -137,10 +137,12 @@ public class MainActivity extends AppCompatActivity {
             mapView.setOnSingleTapListener(new OnSingleTapListener() {
                 @Override
                 public void onSingleTap(float x, float y) {
+                    mapView.setOnSingleTapListener(null);
                     Point pt = mapView.toMapPoint(x, y);
-                    Intent intent = new Intent();
-                    intent.putExtra(NetworkAnalystFormFragment.EXTRA_XY, new double[]{pt.getX(), pt.getY()});
-                    intent.putExtra(NetworkAnalystFormFragment.EXTRA_SR_WKID, mapView.getSpatialReference().getID());
+                    Intent intent = NetworkAnalystFormFragment.createResponseIntentFromPoint(
+                            pt,
+                            mapView.getSpatialReference().getID()
+                    );
                     setResult(NetworkAnalystFormFragment.RESULT_TAP_POINT_OK, intent);
                     finish();
                 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.esri.android.map.MapView;
+import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.core.geometry.Point;
 import com.esri.devsummit.dc.year2016.networkanalysttasks.R;
 
@@ -84,12 +85,27 @@ public abstract class NetworkAnalystFormFragment extends Fragment implements Vie
     @Override
     public void onClick(View v) {
         MainMapFragment mapFragment = (MainMapFragment) getFragmentManager().findFragmentById(R.id.fragment_mainMap);
+        //The requestCode is the index of the location chooser
+        final int requestCode = getLocationChoosers((ViewGroup) getView()).indexOf(v.getParent());
         if (null != mapFragment && null != mapFragment.getView()) {
-            MapView mapView = (MapView) mapFragment.getView().findViewById(R.id.map);
+            final MapView mapView = (MapView) mapFragment.getView().findViewById(R.id.map);
+            if (null != mapView) {
+                mapView.setOnSingleTapListener(new OnSingleTapListener() {
+                    @Override
+                    public void onSingleTap(float x, float y) {
+                        Point pt = mapView.toMapPoint(x, y);
+                        onActivityResult(
+                                requestCode,
+                                RESULT_TAP_POINT_OK,
+                                createResponseIntentFromPoint(pt, mapView.getSpatialReference().getID())
+                        );
+                    }
+                });
+            }
         } else {
             Intent intent = new Intent(getContext(), MainActivity.class);
             intent.setAction(ACTION_TAP_POINT);
-            startActivityForResult(intent, getLocationChoosers((ViewGroup) getView()).indexOf(v.getParent()));
+            startActivityForResult(intent, requestCode);
         }
     }
 
@@ -108,6 +124,13 @@ public abstract class NetworkAnalystFormFragment extends Fragment implements Vie
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public static Intent createResponseIntentFromPoint(Point pt, int srWkid) {
+        Intent intent = new Intent();
+        intent.putExtra(NetworkAnalystFormFragment.EXTRA_XY, new double[]{pt.getX(), pt.getY()});
+        intent.putExtra(NetworkAnalystFormFragment.EXTRA_SR_WKID, srWkid);
+        return intent;
     }
 
 }
