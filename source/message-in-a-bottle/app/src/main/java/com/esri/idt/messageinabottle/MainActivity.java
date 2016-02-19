@@ -3,6 +3,7 @@ package com.esri.idt.messageinabottle;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.esri.android.map.GraphicsLayer;
@@ -61,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
             public void onSingleTap(float x, float y) {
                 mapView.setOnSingleTapListener(null);
 
+                final Snackbar snackbar_calculating = Snackbar.make(
+                        findViewById(R.id.coordinatorLayout_main),
+                        R.string.calculating,
+                        Snackbar.LENGTH_INDEFINITE
+                );
+                snackbar_calculating.show();
+
                 graphicsLayer.removeAll();
 
                 Point pt = (Point) GeometryEngine.normalizeCentralMeridian(mapView.toMapPoint(x, y), mapView.getSpatialReference());
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     protected void onPostExecute(GPParameter[] results) {
+                        snackbar_calculating.dismiss();
                         if (null != results) {
                             for (GPParameter result : results) {
                                 GPFeatureRecordSetLayer resultRecordSet = (GPFeatureRecordSetLayer) results[0];
@@ -106,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+                        } else {
+                            Snackbar.make(findViewById(R.id.coordinatorLayout_main), R.string.error, Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 }.execute(params);

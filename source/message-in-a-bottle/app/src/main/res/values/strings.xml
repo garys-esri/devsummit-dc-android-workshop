@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Message in a Bottle</string>
+    <string name="calculating">Calculating the bottle\'s path…</string>
+    <string name="error">Something went wrong.</string>
 </resources>
